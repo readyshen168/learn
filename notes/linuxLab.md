@@ -2,13 +2,21 @@
 
 ## sed 用例
 
-### 对 git 仓库 git log， 结果输出到 gitLab.md 的第 10 行之后
+### 对 git 仓库 git cherry-pick， 结果、错误信息、提示都输出到 gitLab.md 的第 10 行之后
 
-1. `sed -i '10a\'"$(git log)" gitLab.md`
+1. 变量扩展`'10a\'`, 直接写 `'10a $(git cherry-pick HEAD@{7})'`会让 sed 试图插入字面字符串 "$(git log)"，而非命令执行结果：
+
+   `sed -i '10a\'"$(git cherry-pick HEAD@{7} 2>&1)" gitLab.md`
+
+   ```bash
+   sed -i '15a\'"$(git cherry-pick HEAD@{7} 2>&1)" gitLab.md
+   sed: 1: "gitLab.md": extra characters at the end of g command
+   ```
+
    实例分支：
    [sed#1](../gitLab/gitLab.md?branch=linux#sed#1)
 
-2. `git log | sed -i '10r /dev/stdin' gitLab.md`
+2. r 命令：`git log | sed -i '10r /dev/stdin' gitLab.md`
    问题：/dev/stdin 是否多余
    实例分支：
    [sed#2](../gitLab/gitLab.md?branch=linux#sed#2)
