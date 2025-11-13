@@ -1,5 +1,22 @@
 # gitLab git 的实验
 
+## 分支定理
+
+1. 分支指向某个提交 commit, Git 必须知道它的所有父提交 [参考](https://yuanbao.tencent.com/chat/naQivTmsDa/6f7e44d7-8243-49bb-a0cf-c3a419cf46d9)
+   这就意味着：
+   1. 从不同分支合并的提交， 即便只推送了某个分支到远程仓库，该分支所指向的提交的所有父提交都会被推送到远程仓库；
+
+## git config
+
+- 配置文件位置： ~/.gitconfig
+- 查看所有配置项： git config --global --list
+
+ubuntu 上 git 网络连接问题：GnuTLS recv error (-110): The TLS connection was non-properly terminated
+
+- git config --global http.sslBackend "gnutls"
+- 撤销上面的配置： git config --global --unset http.sslBackend
+- git ls-remote <URL 地址> 验证
+
 ## 远程仓库改名、URL
 
 - 改名:`git remote rename origin github`
